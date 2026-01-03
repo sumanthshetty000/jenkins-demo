@@ -1,3 +1,3 @@
 #!/bin/bash
-echo "hello from github"
+echo "New change from github"
 date
