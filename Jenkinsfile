@@ -19,7 +19,7 @@ pipeline {
                 expression { RUN_TESTS }
             }
             steps {
-                sh 'echo Running testss'
+                sh 'echo Running tests'
             }
         }
 
@@ -29,5 +29,7 @@ pipeline {
           chmod +x demo.sh
           ./demo.sh
         '''
+    }
+}
     }
 }
