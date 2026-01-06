@@ -25,11 +25,22 @@ pipeline {
 
         stage('Deploy') {
     steps {
-        sh '''
-          chmod +x demo.sh
-          ./demo.sh
-        '''
+        script {
+            if (ENV == 'prod') {
+                echo "⚠️ Production deployment detected"
+                sh '''
+                  echo "Running production safety checks"
+                  chmod +x demo.sh
+                  ./demo.sh
+                '''
+            } else {
+                echo "Deploying to non-production environment: ${ENV}"
+                sh '''
+                  chmod +x demo.sh
+                  ./demo.sh
+                '''
+            }
+        }
     }
 }
-    }
-}
+
