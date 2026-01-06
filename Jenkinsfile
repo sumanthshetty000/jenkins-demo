@@ -1,10 +1,31 @@
 pipeline {
     agent any
 
+    parameters {
+        string(name: 'APP_NAME', defaultValue: 'demo-app')
+        choice(name: 'ENV', choices: ['dev', 'test', 'prod'])
+        booleanParam(name: 'RUN_TESTS', defaultValue: true)
+    }
+
     stages {
-        stage('Hello') {
+        stage('Build') {
             steps {
-                echo 'Hello from Jenkins Pipeline 🚀'
+                echo "Building ${APP_NAME}"
+            }
+        }
+
+        stage('Test') {
+            when {
+                expression { RUN_TESTS }
+            }
+            steps {
+                sh 'echo Running tests'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                sh 'echo Deploying to ${ENV}'
             }
         }
     }
