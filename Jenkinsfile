@@ -24,9 +24,10 @@ pipeline {
         }
 
         stage('Deploy') {
-            steps {
-                sh 'echo Deploying to ${ENV}'
-            }
-        }
+    steps {
+        sh '''
+          chmod +x demo.sh
+          ./demo.sh
+        '''
     }
 }
